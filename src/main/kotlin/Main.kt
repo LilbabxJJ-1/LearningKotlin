@@ -1,14 +1,26 @@
-fun start(){
-    val list = arrayOf("dog", 1, "person", 3)
-    for (item in list){
-        if (item is String) {
-            println("$item is a String")
-        }else{
-            println("$item is not a String")
-        }
+
+fun input(prompt: String, type: Any): Any? {
+    println(prompt)
+    return if (type == String) {
+        readln()
+    }else if (type == Int) {
+        readln().toIntOrNull()
+    } else {
+        readln().toDoubleOrNull()
     }
+}
+fun getInfo(): Array<Any> {
+    val name = input("What is your name?", String)
+    println("What's your age?")
+    val orig = readln()
+    val age = orig.toIntOrNull() ?: throw NumberFormatException("$orig is not a number")
+    return arrayOf("$name is $age years old!", age)
 }
 
 fun main() {
-    start()
+    val info = getInfo()
+    val sentence = info[0]
+    val age = info[1].toString().toInt()
+    println(sentence)
+    println("You are a: ${checkValue(age)}")
 }
